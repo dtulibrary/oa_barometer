@@ -1,0 +1,148 @@
+$(function () {
+        var chart;
+        $(document).ready(function () {
+            var colors = Highcharts.getOptions().colors,
+            categories1 = [
+            <%BAROMETER_JSON["sources"].keys().each_with_index do |source,index|%>
+        		<%="'#{source.titleize}'#{(index==BAROMETER_JSON["sources"].keys().size-1 ? '': ',')}".html_safe%>
+        	<%end%>
+            ],
+            name1 = 'Actual',
+	name = [
+		<%BAROMETER_JSON["topics"].keys().each_with_index do |topic,index|%>
+		<%="'#{topic}'".html_safe%><%="#{(BAROMETER_JSON["topics"].keys().size-1 == index ? '' : ',')}"%>
+		<%end%>
+	],
+     <%BAROMETER_JSON["topics"].keys().each_with_index do |topic,index|%>
+     data<%=index%> = [
+     <%BAROMETER_JSON["sources"].keys().each_with_index do |source,s_index|%>
+    {
+	    	name: <%="'#{topic}'".html_safe%>,
+	    	color: colors[<%=index%>],
+	    	y: <%=BAROMETER_JSON["sources"][source]["topics"][topic]["oa"]%>,
+	    	drilldown: {
+		         name: 'Not OA Publications',
+		         categories: [
+		         	<%BAROMETER_JSON["topics"].keys().each_with_index do |t,t_index|%>
+		         	'<%=source.titleize%>: <%=t%>'<%="#{(BAROMETER_JSON["topics"].keys().size-1 == t_index ? '' : ',')}"%>
+		         	<%end%>
+		         ],
+		         data: [
+		         	<%BAROMETER_JSON["topics"].keys().each_with_index do |t,t_index|%>
+		         		<%=BAROMETER_JSON["sources"][source]["topics"][t]["non_oa"]%><%="#{(BAROMETER_JSON["topics"].keys().size-1 == t_index ? '' : ',')}"%>
+		         	<%end%>
+		         ],
+		                 
+		         color: colors[0],
+		         
+		         name1: 'OA Publications',
+		         data1: [
+ 		         	<%BAROMETER_JSON["topics"].keys().each_with_index do |t,t_index|%>
+		         		<%=BAROMETER_JSON["sources"][source]["topics"][t]["oa"]%><%="#{(BAROMETER_JSON["topics"].keys().size-1 == t_index ? '' : ',')}"%>
+		         	<%end%>
+		         ],
+		         color1:colors[1]
+		     }
+	}<%="#{(BAROMETER_JSON["sources"].keys().size-1 == s_index ? '' : ',')}"%>
+	<%end%>
+	];   
+    <%end%>
+        
+        function setChart(name, categories, data, color) {
+                console.log(name, categories, data, color);
+                chart.xAxis[0].setCategories(categories);
+                while (chart.series.length > 0) {
+                    chart.series[0].remove(true);
+                }
+                for (var i = 0; i < data.length; i++) {
+                    chart.addSeries({
+                        name: name[i],
+                        data: data[i],
+                        color: color[i]
+                    });
+                    
+                }
+            }
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container2',
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Open Access in Topic'
+                },
+                subtitle: {
+                    text: 'Click the bars to view institution in detail. Click again to return to overview.'
+                },
+                xAxis: {
+                    categories: categories1
+                },
+                yAxis: {
+                	min: 0,
+                    title: {
+                        text: 'OA Publications'
+                    }
+                },
+
+                plotOptions: {
+                    bar: {
+                        cursor: 'pointer',
+                        point: {
+                            events: {
+                                click: function () {
+                                    var drilldown = this.drilldown;
+                                    if (drilldown) { // drill down
+                                        setChart([drilldown.name,drilldown.name1], drilldown.categories, [drilldown.data, drilldown.data1], [drilldown.color,drilldown.color1]);
+                                    } else { // restore
+                                        setChart(name, categories1, [data0,data1,data2,data3], colors);
+                                    }
+                                }
+                            }
+                        },
+
+                        dataLabels: {
+                            enabled: true,
+                            color: colors[0],
+                            style: {
+                                fontWeight: 'bold'
+                            },
+                            formatter: function () {
+                                return this.y; // +'%';
+                            }
+                        }
+                    }
+                },
+
+                tooltip: {
+                    formatter: function () {
+                        var point = this.point,
+                        series = point.series,
+                        s = 'Open Access Publications in Topic' + '<br/>' + this.x + ' ' + series.name + ' is <b>' + this.y + '</b><br/>';
+                        if (point.drilldown) {
+                            s += 'Click to view <b>' + point.category + ' </b>' + ' in detail';
+                        } else {
+                            s += 'Click to return to overview.';
+                        }
+                        return s;
+                    }
+                },
+
+                series: [
+                <%BAROMETER_JSON["topics"].keys().each_with_index do |topic,index|%>
+                {
+                    name: <%="'#{topic}'".html_safe%>,
+                    data: data<%=index%>,
+                    color: colors[<%=index%>]
+                }<%="#{(BAROMETER_JSON["topics"].keys().size-1 == index ? '' : ',')}"%>
+                <%end%>
+                ],
+
+                exporting: {
+                    enabled: false
+                }
+            },
+                function (chart) {
+                console.log(chart);
+            });
+        });
+    });

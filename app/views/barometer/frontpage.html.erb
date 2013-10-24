@@ -1,0 +1,94 @@
+                <div id="page">
+            	<div id="navigation">
+                <ul class="ca-menu">
+                    <li class="selected-menu">
+                        <a href="javascript:showVisualization(0);"><!--<%=url_for(:controller => 'barometer', :action => 'index', :selected_item => 0)%>-->
+                            <span class="ca-icon">A</span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Open Access Now</h2>
+                                <h3 class="ca-sub">Welcome to OA Barometer</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:showVisualization(1);">
+                            <span class="ca-icon">I</span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Dataset Overview</h2>
+                                <h3 class="ca-sub">Which data is used?</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:showVisualization(2);">
+                            <span class="ca-icon">C</span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Open Access in Topics</h2>
+                                <h3 class="ca-sub">Which fields are in the lead?</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:showVisualization(3);">
+                            <span class="ca-icon">S</span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Sophisticated Team</h2>
+                                <h3 class="ca-sub">Professionals in action</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:showVisualization(4);">
+                            <span class="ca-icon">d</span>
+                            <div class="ca-content">
+                                <h2 class="ca-main">Unconditional Support</h2>
+                                <h3 class="ca-sub">24/7 for you needs</h3>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+        </div>
+        <div id="content-wrapper">        
+	        <div id="container0" class="visualization" style="min-width: 800px; max-width: 800px; height: 600px; margin: 0 auto">
+	        	<canvas id="tutorial" width="800" height="600">Canvas not available.</canvas>
+	        </div>
+	        <div id="container1" class="visualization" style="min-width: 800px; max-width: 800px; height: 600px; margin: 0 auto"></div>
+	        <div id="container2" class="visualization" style="min-width: 800px; max-width: 800px; height: 600px; margin: 0 auto">
+	        	
+	        </div>
+	        <div id="container3" class="visualization" style="min-width: 800px; max-width: 800px; height: 600px; margin: 0 auto"></div>
+        </div>
+        </div>
+        <script type="text/javascript">
+        	$(document).ready(function(){
+			  // show only container for the first slide when page is initially loaded.
+			  //$('.selected-menu').css('background-color','#EEDD82');
+			  $('.visualization').hide();
+			  $('#container<%=(@selected_item.nil? ? 0 : @selected_item)%>').show();
+			  $('.ca-menu li').click(function() {
+			  	$('.ca-menu li').removeClass('selected-menu');
+    		 	$(this).addClass('selected-menu');
+			  });
+			});
+			function showVisualization(index){
+			  $('.visualization').hide();
+			  $('#container'+index).show();
+//			  $('.ca-menu li').removeClass('selected-menu');//.css('background-color','#fff');
+			  // $('.ca-menu li').hover(function(){
+			  	// $('.ca-menu li').css('background-color','#EEDD82');
+			  // },function(){
+			  	// $('.ca-menu li').css('background-color','#fff');
+			  // });
+	//		  $('.ca-menu li:eq('+index+')').addClass('selected-menu');//.css('background-color','#EEDD82');
+			  
+			}
+        </script>
+        <%=render :partial => "barometer/oa_barometer_chart"%>
+        <script type="text/javascript">
+        	<%=render :partial => "barometer/drilldownchart"%> // container2
+        	<%=render :partial => "barometer/reingold_tilford_tree"%> // container1
+			$(function () {
+				<%=render :partial => "barometer/barchart"%> // container3
+				
+			}); // function
+		</script>

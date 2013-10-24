@@ -1,0 +1,74 @@
+        <nav>
+		<ul>
+			<li>
+				<a href="#">
+					<span>Home</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<span>About</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<span>Portfolio</span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<span>Contact</span>
+				</a>
+			</li>
+			
+		</ul>
+	</nav>
+        
+        <div id="container0" class="visualization" style="min-width: 800px; max-width: 800px; height: 600px; margin: 0 auto">
+        	<canvas id="tutorial" width="800" height="600">Canvas not available.</canvas>
+        </div>
+        <div id="container1" class="visualization" style="min-width: 800px; max-width: 800px; height: 600px; margin: 0 auto"></div>
+        <div id="container2" class="visualization" style="min-width: 800px; max-width: 800px; height: 600px; margin: 0 auto">
+        	
+        </div>
+        <div id="container3" class="visualization" style="min-width: 800px; max-width: 800px; height: 600px; margin: 0 auto"></div>
+
+        <script>
+			$(document).ready(function(){
+			  // show only container for the first slide when page is initially loaded.
+			  $('.visualization').hide();
+			  $('#container<%=(@selected_item.nil? ? '0' : @selected_item)%>').show();
+			
+			  $('.bxslider').bxSlider({
+			    slideWidth: 200,//300,
+			    minSlides: 2,
+			    maxSlides: 4,
+			    moveSlides: 1,
+			    slideMargin: 10,
+			    //infiniteLoop: false,
+  				//hideControlOnEnd: true,
+			    onSlideAfter: function($slideElement, oldIndex, newIndex){
+				  //alert('A slide has finished transitioning. Bravo. Click OK to continue!');
+				  //alert('oldIndex = '+oldIndex+' newIndex = '+newIndex);
+				  // toggle focus / unfocus images
+				  $('.slide_focus.slide'+oldIndex).hide();
+				  $('.slide_unfocus.slide'+oldIndex).show();
+				  $('.slide_focus.slide'+newIndex).show();
+				  $('.slide_unfocus.slide'+newIndex).hide();
+				  // show only the container for the current slide.
+				  $('.visualization').hide();
+				  $('#container'+newIndex).show();
+				}
+			  });			  
+			});
+			
+        </script>
+        <%=render :partial => "barometer/oa_barometer_chart"%>
+        <script type="text/javascript">
+        	<%=render :partial => "barometer/drilldownchart"%> // container2
+        	<%=render :partial => "barometer/reingold_tilford_tree"%> // container1
+			$(function () {
+				<%=render :partial => "barometer/barchart"%> // container3
+				
+			}); // function
+		</script>

@@ -1,0 +1,276 @@
+<!--<canvas id="tutorial" width="440" height="220">Canvas not available.</canvas>-->
+<script type="text/javascript">
+// $(document).ready(function(){
+var requestAnimationFrame =  
+        window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        function(callback) {
+          return setTimeout(callback, 1);
+        };
+
+/* Animation Object */
+var animationObject = {
+	//'startPercentage': 0.0,
+	'endPercentage': 0.74,
+	'currentPercentage': 0.0
+	};
+
+/* Render function */
+var render = function() {
+    /* Main entry point for drawing the barometer
+    * If canvas is not support alert the user.
+    */
+    var canvas = document.getElementById('tutorial');
+    // Canvas good?
+    if (canvas !== null && canvas.getContext)
+    {
+        var options = buildOptionsAsJSON(canvas);
+        // Clear canvas
+        clearCanvas(options);
+        // Draw stuff....
+        drawCircle(options);
+        drawTop(options);
+    }
+    else
+    {
+        alert("Canvas not supported by your browser!");
+    }
+    // Redraw
+	requestAnimationFrame(render); 
+};
+render();
+/* Animation functions */
+var animate = function(prop, val, duration) {
+  // The calculations required for the step function
+  var start = new Date().getTime();
+  var end = start + duration;
+  var current = animationObject.currentPercentage;
+  var distance = animationObject.endPercentage - current;
+
+  var step = function() {
+    // Get our current progres
+    var timestamp = new Date().getTime();
+    var progress = Math.min((duration - (end - timestamp)) / duration, 1);
+
+    // Update the square's property
+    animationObject[prop] = current + (distance * progress);
+
+    // If the animation hasn't finished, repeat the step.
+    if (progress < 1) requestAnimationFrame(step);
+  };
+
+  // Start the animation
+  return step();
+};
+
+animate('currentPercentage', 0, 3000);
+
+/* Drawing functions */
+function clearCanvas(options) {
+	options.ctx.clearRect(0, 0, 800, 600);
+	applyDefaultContextSettings(options);
+}
+
+function applyDefaultContextSettings(options) {
+	/* Helper function to revert to gauges
+	* default settings
+	*/
+	options.ctx.lineWidth = (options.radius / 100) * 33;
+	options.ctx.globalAlpha = 1.0;//0.5;
+	options.ctx.strokeStyle = "rgb(255, 255, 255)";
+	options.ctx.fillStyle = 'rgb(255,255,255)';
+	options.ctx.textAlign = 'center';
+	options.ctx.font = options.fontSize+"pt Helvetica bold, sans-serif";
+	options.lineOffset = options.ctx.lineWidth * 0.5;
+}
+
+function buildOptionsAsJSON(canvas) {
+	/* Setting for the speedometer 
+	* Alter these to modify its look and feel
+	*/
+	var centerX = 400,
+	centerY = 300,
+	radius = 120,
+	outerRadius = 120;
+	
+	// Create a speedometer object using Javascript object notation
+	return {
+	ctx: canvas.getContext('2d'),
+	center: {
+	X: centerX,
+	Y: centerY
+	},
+	levelRadius: radius - 10,
+	gaugeOptions: {
+	center: {
+	X: centerX,
+	Y: centerY
+	},
+	radius: radius
+	},
+	radius: outerRadius,
+	fontSize: 14,
+	color: {
+		oaOrange: "rgb(255, 165, 0)",//"rgb(255, 127, 0)",//"orange",//"rgb(255, 140, 0)",//
+		oaFill: "rgb(238, 221, 130)"//"rgb(255, 215, 0)"//"yellow"
+	},
+	};
+}
+
+function drawTop(options){
+	drawLine(options);
+	drawArc(options);
+}
+
+function drawLine(options){
+    options.ctx.save();
+    options.ctx.beginPath();
+ 
+    options.ctx.fillStyle = options.color.oaOrange;
+    options.ctx.globalCompositeOperation = 'source-over';
+    
+    // Clippling rectangle
+    clipRadius = options.radius - options.ctx.lineWidth;
+    options.ctx.rect(0, 0, 800, options.center.Y-clipRadius + options.lineOffset);
+    options.ctx.closePath();
+    options.ctx.clip();
+    
+    // Line
+    options.ctx.beginPath();
+    w = options.ctx.lineWidth;
+	h = options.radius + (options.radius / 100) * 34;
+    upperLeftX = options.center.X + (options.radius - options.ctx.lineWidth) - options.lineOffset;
+    upperLeftY = options.center.Y - h;;
+ 
+    // Draw the outer line
+    options.ctx.rect(upperLeftX, upperLeftY, w, h);
+     
+    // Fill the last object
+    options.ctx.fill();
+    options.ctx.closePath();
+    options.ctx.globalCompositeOperation = 'source-over';
+    
+    options.ctx.restore();
+}
+
+function drawArc(options){
+	drawOuterArc(options);
+}
+
+function drawOuterArc(options){
+    options.ctx.beginPath();
+ 
+    options.ctx.strokeStyle = options.color.oaOrange;
+ 
+	w = (options.ctx.lineWidth / 2) + options.lineOffset; //(options.radius / 100) * 20 - (options.ctx.lineWidth / 2);
+	h = options.radius + (options.radius / 100) * 33; //TODO: use w instead!
+    upperLeftX = options.center.X + ((options.radius / 100) * 80);
+    upperLeftY = options.center.Y - h;
+    
+    
+    // Draw the outer circle
+    options.ctx.arc(options.center.X,
+        options.center.Y - h,
+        options.radius - w,
+        0,
+        Math.PI,
+        true);
+ 
+    // Fill the last object
+    options.ctx.stroke();
+    options.ctx.closePath();
+}
+
+function drawCircle(options){
+	drawOuterCircle(options);
+	drawMiddleCircle(options);
+	drawInnerCircle(options);
+}
+
+function drawOuterCircle(options){
+    /* Draw the metallic border of the speedometer
+     * Outer grey area
+     */
+    options.ctx.beginPath();
+ 
+    // Nice shade of grey
+    options.ctx.strokeStyle = options.color.oaOrange;
+ 
+    // Draw the outer circle
+    options.ctx.arc(options.center.X,
+        options.center.Y,
+        options.radius - (options.ctx.lineWidth / 2),
+        0,
+        2 * Math.PI,
+        false);
+ 
+    // Fill the last object
+    options.ctx.stroke();
+    options.ctx.closePath();
+}
+
+function drawMiddleCircle(options){
+    /* Draw the metallic border of the speedometer
+     * Outer grey area
+     */
+    options.ctx.save();
+    options.ctx.beginPath();
+ 	// White
+    options.ctx.fillStyle = options.color.oaFill;
+    
+    clipRadius = options.radius - options.ctx.lineWidth;
+    // // Draw the middle circle
+    options.ctx.arc(options.center.X,
+        options.center.Y,
+        clipRadius,
+        0,
+        2 * Math.PI,
+        false);
+ 
+    // // Fill the last object
+    options.ctx.closePath();
+    options.ctx.clip();
+    options.ctx.beginPath();
+    options.ctx.rect(
+    	options.center.X - clipRadius, // upper left x
+    	(options.center.Y - clipRadius) + (1 - animationObject.currentPercentage) * (clipRadius * 2), // upper left y
+    	clipRadius * 2, // width
+    	clipRadius * 2 // height
+    	)
+    options.ctx.fill();
+
+    options.ctx.closePath();
+    options.ctx.restore();
+}
+
+function drawInnerCircle(options){
+    /* Draw the metallic border of the speedometer
+     * Outer grey area
+     */
+    options.ctx.beginPath();
+     
+	// Nice shade of grey
+    options.ctx.fillStyle = options.color.oaOrange;
+    
+    // Draw the inner circle
+    options.ctx.arc(options.center.X,
+        options.center.Y,
+        options.ctx.lineWidth,
+        0,
+        2 * Math.PI,
+        false);
+ 
+    // Fill the last object
+    options.ctx.fill();
+    options.ctx.fillStyle = "black";
+    label = Math.round(animationObject.currentPercentage * 100) + "%";
+    options.ctx.fillText(label, options.center.X, options.center.Y + (options.fontSize / 2));
+    
+    options.ctx.closePath();
+}
+
+
+</script>

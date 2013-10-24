@@ -1,0 +1,73 @@
+$('#container3').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Open Access in Topic'
+            },
+            subtitle: {
+                text: 'Ordered by Institution'
+            },
+            xAxis: {
+                categories: [
+	        	<%BAROMETER_JSON["sources"].keys().each_with_index do |source,index|%>
+	        		<%="'#{source.titleize}'#{(index==BAROMETER_JSON["sources"].keys().size-1 ? '': ',')}".html_safe%>
+	        	<%end%>
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'OA publications'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                },
+                series: {
+	                cursor: 'pointer',
+	                point: {
+	                    events: {
+	                        click: function() {
+	                            alert ('Category: '+ this.category +', value: '+ this.y);
+	                        }
+	                    }
+	                }
+            	}
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF',
+                shadow: true
+            },
+            series: [
+            <%BAROMETER_JSON["topics"].keys().each_with_index do |topic,index|%>
+            {
+			    	name: <%="'#{topic}'".html_safe%>,
+			    	data: [
+				    	<%BAROMETER_JSON["sources"].keys().each_with_index do |source,s_index|%>
+			    			<%=BAROMETER_JSON["sources"][source]["topics"][topic]["oa"]%>
+			    			<%="#{(BAROMETER_JSON["sources"].keys().size-1 == s_index ? '' : ',')}"%>
+			    		<%end%>
+			    	]
+			}<%="#{(BAROMETER_JSON["topics"].keys().size-1 == index ? '' : ',')}"%>
+            <%end%>
+            ]
+        });

@@ -1,0 +1,50 @@
+// Place all the styles related to the Barometer controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.node {
+  font: 10px sans-serif;
+  circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+#page {
+  margin: 0 auto;
+  width: 1020px;
+}
+
+#navigation{
+  margin: 0 auto;
+  width: 1020px;
+  float:left;
+}
+#content-wrapper {
+  margin: 25px auto 0;
+  width: 1020px;//width: 800px;
+  float: left
+}
+
+// Flat menu
+nav {
+  margin: 100px 80px 0 auto;
+  width: 1000px;
+}
+span.ca-icon {
+  font-size: 40px !important;
+  line-height: 100px !important;//135px
+}
+.ca-menu li{
+    width: 200px;
+    height: 200px !important;//250px
+}
+h2.ca-main {
+  font-size: 22px !important;//25px
+}
