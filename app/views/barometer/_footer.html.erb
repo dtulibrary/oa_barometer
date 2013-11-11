@@ -1,0 +1,34 @@
+<table>
+	<tr>
+		<td><a id="contact_link" href="#contact_popup">Contact</a></td>
+		<td><a id="about_link" href="#about_popup">About</a></td>
+		<td><a id="thanks_link" href="#thanks_popup">Thanks to</a></td>
+	</tr>
+</table>
+<div id="popups">
+	<div id="contact_popup" style="width: 750px; height: 500px;">
+		<h1>Contact</h1>
+		<p>Place some text/html here....</p>
+	</div>
+	<div id="about_popup" style="width: 750px; height: 500px;">
+		<h1>About</h1>
+		<p>Place some text/html here....</p>
+	</div>
+	<div id="thanks_popup" style="width: 750px; height: 500px;">
+		<h1>Thanks to</h1>
+		<p>Place some text/html here....</p>
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$("#contact_link").colorbox({
+			inline:true, width:"800px"
+		});
+		$("#about_link").colorbox({
+			inline:true, width:"800px"
+		});
+		$("#thanks_link").colorbox({
+			inline:true, width:"800px"
+		});
+	});
+</script>

@@ -9,6 +9,7 @@ var diagonal = d3.svg.diagonal.radial()
     .projection(function(d) { return [d.y, d.x / 180 * Math.PI]; });
 
 var svg = d3.select("#container1").append("svg")
+	.attr("id", "svgCanvas")
     .attr("width", diameter)
     .attr("height", diameter - 200) // - 150
   .append("g")

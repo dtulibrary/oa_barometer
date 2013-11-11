@@ -32,8 +32,9 @@
                         <a href="javascript:showVisualization(3);">
                             <span class="ca-icon">S</span>
                             <div class="ca-content">
-                                <h2 class="ca-main">Sophisticated Team</h2>
-                                <h3 class="ca-sub">Professionals in action</h3>
+                                <h2 class="ca-main">Top Journals</h2>
+                                <!--<h3 class="ca-sub">Which journals publish the most?</h3>-->
+                                <h3 class="ca-sub">Which journals are in the lead?</h3>
                             </div>
                         </a>
                     </li>
@@ -49,16 +50,17 @@
                 </ul>
         </div>
         <div id="content-wrapper">        
-	        <div id="container0" class="visualization" style="min-width: 800px; max-width: 800px; height: 600px; margin: 0 auto">
-	        	<canvas id="tutorial" width="800" height="600">Canvas not available.</canvas>
+	        <div id="container0" class="visualization">
+	        	<canvas id="canvas" height="600" width="800">Canvas not available.</canvas>
 	        </div>
-	        <div id="container1" class="visualization" style="min-width: 800px; max-width: 800px; height: 600px; margin: 0 auto"></div>
-	        <div id="container2" class="visualization" style="min-width: 800px; max-width: 800px; height: 600px; margin: 0 auto">
+	        <div id="container1" class="visualization"></div>
+	        <div id="container2" class="visualization">
 	        	
 	        </div>
-	        <div id="container3" class="visualization" style="min-width: 800px; max-width: 800px; height: 600px; margin: 0 auto"></div>
+	        <div id="container3" class="visualization"></div>
         </div>
-        </div>
+
+        </div> <!-- page end -->
         <script type="text/javascript">
         	$(document).ready(function(){
 			  // show only container for the first slide when page is initially loaded.
@@ -88,7 +90,7 @@
         	<%=render :partial => "barometer/drilldownchart"%> // container2
         	<%=render :partial => "barometer/reingold_tilford_tree"%> // container1
 			$(function () {
-				<%=render :partial => "barometer/barchart"%> // container3
+				<%=render :partial => "barometer/top_journal_chart"%> // container3
 				
 			}); // function
 		</script>

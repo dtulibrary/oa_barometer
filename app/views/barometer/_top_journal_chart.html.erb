@@ -1,0 +1,90 @@
+$('#container3').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Top Journals'
+            },
+            subtitle: {
+                text: 'Ordered by Publications. Coloring indicates SHERPA RoMEO color.'
+            },
+            xAxis: {
+                categories: [
+	        	<%TOP_JSON["total"].each_with_index do |journal,index|%>
+	        		<%if index == 20%>
+	        			<%="'#{journal["title"].titleize}'".html_safe%>
+	        			<%break;%>
+	        		<%end%>
+	        		<%="'#{journal["title"].titleize}'#{(index==TOP_JSON["total"].size-1 ? '': ',')}".html_safe%>
+	        	<%end%>
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Publications'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.0f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                },
+                series: {
+	                cursor: 'pointer',
+	                point: {
+	                    events: {
+	                        click: function() {
+	                        	if(this.color != 'Black'){
+		                            alert (
+		                            'Journal: \"'+ this.category+'\"\n'+
+		                            'Publications: '+ this.y+'\n'+
+		                            'SHERPA RoMEO Color: '+this.color+'\n'
+		                            );
+	                         } else {
+	                         	alert (
+	                            'Journal: \"'+ this.category+'\"\n'+
+	                            'Publications: '+ this.y+'\n'+
+	                            'SHERPA RoMEO Color: Unknown\n'
+	                            );
+	                         }
+	                        }
+	                    }
+	                }
+            	}
+            },
+            legend: {
+            	enabled: false
+            },
+            exporting: {
+                    enabled: false
+            },
+            series: [ //maybe add a journal and a oa journal series ?
+            {
+            	name: 'Publications',
+            	color: 'orange',
+            	data: [
+            	<%TOP_JSON["total"].each_with_index do |journal,index|%>
+            		{
+            		color: "<%=(journal['oa_color'].eql?("unknown") ? 'Black' : journal['oa_color'].titleize)%>",
+            		y: <%=journal['count']%>
+            		}
+					<%if index == 20%>
+						<%break%>
+					<%end%>
+					<%="#{(TOP_JSON["total"].size-1 == index ? '' : ',')}"%>
+    			<%end%>
+            	]
+            }
+
+            ]
+        });
