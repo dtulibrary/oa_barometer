@@ -1,3 +1,5 @@
+<script type="text/javascript">
+$(function () {
 $('#container3').highcharts({
             chart: {
                 type: 'bar'
@@ -6,7 +8,7 @@ $('#container3').highcharts({
                 text: 'Top Journals'
             },
             subtitle: {
-                text: 'Ordered by Publications. Coloring indicates SHERPA RoMEO color.'
+                text: 'Ordered by Publications. Coloring indicates Open Access availablity (DOAJ Journal).'
             },
             xAxis: {
                 categories: [
@@ -44,19 +46,19 @@ $('#container3').highcharts({
 	                point: {
 	                    events: {
 	                        click: function() {
-	                        	if(this.color != 'Black'){
-		                            alert (
-		                            'Journal: \"'+ this.category+'\"\n'+
-		                            'Publications: '+ this.y+'\n'+
-		                            'SHERPA RoMEO Color: '+this.color+'\n'
-		                            );
-	                         } else {
-	                         	alert (
-	                            'Journal: \"'+ this.category+'\"\n'+
-	                            'Publications: '+ this.y+'\n'+
-	                            'SHERPA RoMEO Color: Unknown\n'
-	                            );
-	                         }
+		                            $.colorbox({html:
+		                            '<h1>'+
+		                            '\"'+ this.category+'\"'+
+		                            '</h1>'+
+		                            '<h3 style="text-align: center;">'+
+		                            'Publications: '+ this.y+''+
+		                            '</h3>'+
+		                            '<br></br>'+
+		                            '<h3 style="text-align: center;">'+
+		                            'Open Access: '+(this.color=='Orange' ? 'Yes' : 'No')+''+
+		                            '</h3>',
+		                            width: "50%"
+		                            });
 	                        }
 	                    }
 	                }
@@ -68,6 +70,9 @@ $('#container3').highcharts({
             exporting: {
                     enabled: false
             },
+            rangeSelector: {
+            	selected: 1
+        	},
             series: [ //maybe add a journal and a oa journal series ?
             {
             	name: 'Publications',
@@ -75,7 +80,7 @@ $('#container3').highcharts({
             	data: [
             	<%TOP_JSON["total"].each_with_index do |journal,index|%>
             		{
-            		color: "<%=(journal['oa_color'].eql?("unknown") ? 'Black' : journal['oa_color'].titleize)%>",
+            		color: "<%=(journal['oa'].downcase.eql?("yes") ? 'Orange' : 'Gray')%>",
             		y: <%=journal['count']%>
             		}
 					<%if index == 20%>
@@ -88,3 +93,5 @@ $('#container3').highcharts({
 
             ]
         });
+    }); // function
+</script>

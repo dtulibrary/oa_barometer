@@ -48,6 +48,7 @@ namespace :config do
     run "ln -nfs #{deploy_to}/shared/config/database.yml #{release_path}/config/database.yml"
     run "ln -nfs #{deploy_to}/shared/config/oa_barometer.json #{release_path}/config/oa_barometer.json"
     run "ln -nfs #{deploy_to}/shared/config/rt_tree.json.erb #{release_path}/public/rt_tree.json.erb"
+    run "ln -nfs #{deploy_to}/shared/config/journal_top.json #{release_path}/config/journal_top.json"
   end
 end
 
