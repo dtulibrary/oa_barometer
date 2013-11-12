@@ -7,5 +7,5 @@ class {'apache2':
 class {'oa_barometer': 
   rails_env  => 'staging',
   conf_set   => 'vagrant',
-  vhost_name => 'oa_barometer.vagrant.vm',
+  vhost_name => 'oabarometer.vagrant.vm',
 }
