@@ -38,7 +38,7 @@ end
 
 # tasks
 
-before "deploy:migrate", "config:symlink"
+before "deploy:assets:precompile", "config:symlink"
 after "deploy:update", "deploy:cleanup"
 
 namespace :config do
