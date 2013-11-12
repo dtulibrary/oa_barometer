@@ -113,6 +113,7 @@ GEM
       net-ssh (>= 2.6.5)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
+    pg (0.14.1)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -224,6 +225,7 @@ DEPENDENCIES
   gelf
   jquery-rails
   lograge
+  pg
   rails (= 3.2.13)
   rails_best_practices
   rspec-rails

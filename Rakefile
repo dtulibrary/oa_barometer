@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-OaBarometerRails::Application.load_tasks
+OaBarometer::Application.load_tasks
