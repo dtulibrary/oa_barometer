@@ -14,6 +14,23 @@
 /log/*.log
 /tmp
 
+# Ignore vim tempfiles
+*~
+
+# Ignore cachelog db migrate
+/db/migrate/*cachelogs.rb
+
+# Ignore secret token (uses db session store)
+/config/initializers/secret_token.rb
+
+# Ignore data files
 oa_barometer.json
+oa_barometer.local.json
 rt_tree.json
 journal_top.json
+journal_top.local.json
+
+# Ignore local application config
+/config/application.local.rb
+
+/vagrant/.vagrant
