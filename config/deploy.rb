@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 
 set :rails_env, ENV['RAILS_ENV'] || 'staging'
 set :application, ENV['HOST'] || 'oabarometer.vagrant.vm'
-set :primoproxy_config, ENV['GAZO_CONFIG'] || "#{rails_env}"
+set :oabarometer_config, ENV['OABAROMETER_CONFIG'] || "#{rails_env}"
 
 set :deploy_to, "/var/www/#{application}"
 role :web, "#{application}"
