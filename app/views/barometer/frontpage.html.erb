@@ -2,7 +2,7 @@
             	<div id="navigation">
                 <ul class="ca-menu">
                     <li class="selected-menu">
-                        <a href="javascript:showVisualization(0);"><!--<%=url_for(:controller => 'barometer', :action => 'index', :selected_item => 0)%>-->
+                        <a href="javascript:showVisualization(0);">
                             <span class="ca-icon">A</span>
                             <div class="ca-content">
                                 <h2 class="ca-main">Open Access Now</h2>
@@ -33,7 +33,6 @@
                             <span class="ca-icon">S</span>
                             <div class="ca-content">
                                 <h2 class="ca-main">Top Journals</h2>
-                                <!--<h3 class="ca-sub">Which journals publish the most?</h3>-->
                                 <h3 class="ca-sub">Which journals are in the lead?</h3>
                             </div>
                         </a>
@@ -75,6 +74,14 @@
 			function showVisualization(index){
 			  $('.visualization').hide();
 			  $('#container'+index).show();
+			  animationObject = {
+				'endPercentage': 0.74,
+				'currentPercentage': 0.0
+				};
+			  if(index==0){ // animate oa barometer
+			  	render();
+			  	animate('currentPercentage', 0, 3000);
+			  }
 //			  $('.ca-menu li').removeClass('selected-menu');//.css('background-color','#fff');
 			  // $('.ca-menu li').hover(function(){
 			  	// $('.ca-menu li').css('background-color','#EEDD82');
