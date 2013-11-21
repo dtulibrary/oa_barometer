@@ -1,18 +1,18 @@
 <script type="text/javascript">
 $(function () {
-$('#container3').highcharts({
+$('#container3-3').highcharts({
             chart: {
                 type: 'bar'
             },
             title: {
-                text: 'Top Journals in Total'
+                text: 'Top Journals for Institution'
             },
             subtitle: {
                 text: 'Ordered by Publications. Coloring indicates Open Access availablity (DOAJ Journal).'
             },
             xAxis: {
                 categories: [
-	        	<%TOP_JSON["total"].each_with_index do |journal,index|%>
+	        	<%TOP_JSON["institutions"][institution].each_with_index do |journal,index|%>
 	        		<%if index == 20%>
 	        			<%="'#{journal["title"].titleize}'".html_safe%>
 	        			<%break;%>
@@ -78,7 +78,7 @@ $('#container3').highcharts({
             	name: 'Publications',
             	color: 'orange',
             	data: [
-            	<%TOP_JSON["total"].each_with_index do |journal,index|%>
+            	<%TOP_JSON["institutions"][institution].each_with_index do |journal,index|%>
             		{
             		color: "<%=(journal['oa'].downcase.eql?("yes") ? 'Orange' : 'Gray')%>",
             		y: <%=journal['count']%>
@@ -86,7 +86,7 @@ $('#container3').highcharts({
 					<%if index == 20%>
 						<%break%>
 					<%end%>
-					<%="#{(TOP_JSON["total"].size-1 == index ? '' : ',')}"%>
+					<%="#{(TOP_JSON["institutions"][institution].size-1 == index ? '' : ',')}"%>
     			<%end%>
             	]
             }

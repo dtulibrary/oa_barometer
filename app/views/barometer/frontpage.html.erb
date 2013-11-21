@@ -48,7 +48,24 @@
                     </li>
                 </ul>
         </div>
-        <div id="content-wrapper">        
+        <div id="content-wrapper">
+        	<%= form_tag("menu", :id => "select-form", :remote => true) do |f|%>
+        	<%= select_tag "content-selector", options_for_select(@menu_items), onchange: "updated(this);" %>
+        	<%= select_tag "sub-selector-topic", options_for_select(TOP_JSON["topics"].keys()), onchange: "updatedSub(this);", :class => "sub-selector" %>
+        	<%= select_tag "sub-selector-institution", options_for_select(TOP_JSON["institutions"].keys()), onchange: "updatedSub(this);", :class => "sub-selector" %>
+        	<!--
+        	<select name="select" id="content-selector" onchange="updated(this)">
+				<option value="1" selected="selected">Journals</option>
+				<option value="2">Topics</option>
+				<option value="3">Institutions</option>
+			</select>
+			<select name="select" id="sub-selector-topic" class="sub-selector" onchange="updatedSub(this)">
+				<option value="1" selected="selected">hum</option>
+				<option value="2">med</option>
+				<option value="3">sci</option>
+				<option value="4">soc</option>
+			</select>        -->
+        	<%end%>
 	        <div id="container0" class="visualization">
 	        	<canvas id="canvas" height="600" width="800">Canvas not available.</canvas>
 	        </div>
@@ -57,6 +74,8 @@
 	        	
 	        </div>
 	        <div id="container3" class="visualization"></div>
+	        <div id="container3-2" class="visualization"></div>
+	        <div id="container3-3" class="visualization"></div>
         </div>
 
         </div> <!-- page end -->
@@ -70,9 +89,13 @@
 			  	$('.ca-menu li').removeClass('selected-menu');
     		 	$(this).addClass('selected-menu');
 			  });
+			  
 			});
 			function showVisualization(index){
 			  $('.visualization').hide();
+			  $('#content-selector').hide();
+			  $('.sub-selector').hide();
+			  //$('#sub-selector-topic').hide();
 			  $('#container'+index).show();
 			  animationObject = {
 				'endPercentage': 0.74,
@@ -81,7 +104,31 @@
 			  if(index==0){ // animate oa barometer
 			  	render();
 			  	animate('currentPercentage', 0, 3000);
+			  } else if(index == 3){
+			  	$('#content-selector').show();
+			  	//$('.sub-selector').hide();
+			  	var selectedName = $('#content-selector').find(":selected").text();
+			  	var selectedValue = $('#content-selector').find(":selected").val();
+			  	//alert(selectedValue + " " + selectedName);
+			  	if(selectedValue == '<%=@menu_items[0]%>'){
+			  		//$('#sub-selector-topic').hide();
+			  		$('#container'+index).show();
+			  		$('#container'+index+'-2').hide();
+			  		$('#container'+index+'-3').hide();
+			  	} else if(selectedValue == '<%=@menu_items[1]%>'){
+			  		$('#sub-selector-topic').show();
+			  		$('#container'+index).hide();
+			  		$('#container'+index+'-2').show();
+			  		$('#container'+index+'-3').hide();
+			  	} else if(selectedValue == '<%=@menu_items[2]%>'){
+			  		$('#sub-selector-institution').show();
+			  		$('#container'+index).hide();
+			  		$('#container'+index+'-2').hide();
+			  		$('#container'+index+'-3').show();
+			  	}
 			  }
+			  
+			  
 //			  $('.ca-menu li').removeClass('selected-menu');//.css('background-color','#fff');
 			  // $('.ca-menu li').hover(function(){
 			  	// $('.ca-menu li').css('background-color','#EEDD82');
@@ -91,6 +138,44 @@
 	//		  $('.ca-menu li:eq('+index+')').addClass('selected-menu');//.css('background-color','#EEDD82');
 			  
 			}
+			function updated(element)
+			{
+				$('.sub-selector').hide();
+			    var idx=element.selectedIndex;
+			    var val=element.options[idx].value;
+			    var content=element.options[idx].innerHTML;
+			    //alert(val + " " + content);
+			    if(val == '<%=@menu_items[0]%>'){
+			    	//$('#sub-selector-topic').show();
+			  		$('#container3').show();
+			  		$('#container3-2').hide();
+			  		$('#container3-3').hide();
+			    } else if(val == '<%=@menu_items[1]%>'){
+			  		$('#sub-selector-topic').show();
+			  		$('#container3').hide();
+			  		$('#container3-2').show();
+			  		$('#container3-3').hide();
+			  	} else if(val == '<%=@menu_items[2]%>'){
+			  		$('#sub-selector-institution').show();
+			  		$('#container3').hide();
+			  		$('#container3-2').hide();
+			  		$('#container3-3').show();
+			  	}
+			   	$('form#select-form').trigger('submit.rails');
+			    			  
+			}
+			function updatedSub(element)
+			{
+			    // var idx=element.selectedIndex;
+			    // var val=element.options[idx].value;
+			    // var content=element.options[idx].innerHTML;
+			    // alert(val + " " + content);
+			    // if(val == 2){
+			    	// //$('#sub-selector-topic').show();
+			    // }
+			    $('form#select-form').trigger('submit.rails');
+			    //TODO: make this update visualization...!
+			}
         </script>
         <%=render :partial => "barometer/oa_barometer_chart"%>
         <script type="text/javascript">
@@ -98,3 +183,5 @@
         	<%=render :partial => "barometer/reingold_tilford_tree"%> // container1
 		</script>
 		<%=render :partial => "barometer/top_journal_chart"%> <!-- container3 -->
+		<%=render :partial => "barometer/top_topic_chart", locals: { topic: @selected_topic }%> <!-- container3-2 -->		
+

@@ -2,6 +2,7 @@ OaBarometer::Application.routes.draw do
   get "barometer/index"
   get "barometer/frontpage"
   get "barometer/rt_tree", :as => :rt_tree
+  post "barometer/menu"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

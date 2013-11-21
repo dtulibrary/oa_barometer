@@ -104,6 +104,25 @@ body {
   //padding-top: 10px;
   border: 2px solid;
   border-radius: 25px;
+  #content-selector {
+    margin-bottom: -2px;//-10px;
+    margin-left: 10px;
+    margin-top: 2px;//10px;
+    position: absolute;
+    z-index: 1000;
+    display:none;
+  }
+  #sub-selector-topic{
+    display:none;
+  }
+  .sub-selector{
+    margin-bottom: -2px;//-10px;
+    margin-left: 130px;
+    margin-top: 2px;//10px;
+    position: absolute;
+    z-index: 1000;
+    display:none;
+  }
 }
 .visualization{
   min-width: 1020px;//800px;
