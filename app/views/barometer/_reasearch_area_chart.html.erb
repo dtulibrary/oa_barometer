@@ -1,0 +1,57 @@
+<script type="text/javascript">
+$(function () {
+        $('#container2').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Research areas'
+            },
+            xAxis: {
+                categories: [
+                <%BAROMETER_JSON["topics"].keys().each_with_index do |topic,index|%>
+                    <%="'#{topic}'".html_safe%>
+                <%="#{(BAROMETER_JSON["topics"].keys().size-1 == index ? '' : ',')}"%>
+                <%end%>
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Publications'
+                }
+            },
+            legend: {
+                backgroundColor: '#FFFFFF',
+                reversed: true
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+            series: [{
+                name: 'OA',
+                color: '#ff9933',
+                data: [
+                <%BAROMETER_JSON["topics"].keys().each_with_index do |topic,index|%>
+                <%=BAROMETER_JSON["topics"][topic]["oa"]%>
+                <%="#{(BAROMETER_JSON["topics"].keys().size-1 == index ? '' : ',')}"%>
+                <%end%>
+                ]
+            }, {
+                name: 'Not OA',
+                color: 'gray',
+                data: [
+                <%BAROMETER_JSON["topics"].keys().each_with_index do |topic,index|%>
+                <%=BAROMETER_JSON["topics"][topic]["non_oa"]%>
+                <%="#{(BAROMETER_JSON["topics"].keys().size-1 == index ? '' : ',')}"%>
+                <%end%>
+                ]
+            }],
+            exporting: {
+                enabled: false
+            }
+        });
+    });
+</script>    

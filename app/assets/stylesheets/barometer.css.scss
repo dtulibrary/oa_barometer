@@ -22,6 +22,9 @@ body {
    margin:0;
    padding:0;
    height:100%;
+   //font-family: "Franklin Gothic Medium";
+   font-family: "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
+   background:#cccccc;// url(../images/beige_paper.png) repeat top left;
 }
 #container {
    min-width:100%;
@@ -29,9 +32,10 @@ body {
    position:relative;
 }
 #page-header {
-   background:#FFA500;
+   background:#99ccff;//#FFA500;
    padding:25px;//60px;
-   box-shadow: 0px 10px 5px #FFA500;//#EEDD82;//#888888;
+   margin-top: -20px; //TODO: remove this... make it work some other way...
+   //box-shadow: 0px 10px 5px #FFA500;//#EEDD82;//#888888;
    h1{
      font-weight:bold;
    }
@@ -91,6 +95,8 @@ body {
 // }
 
 #navigation{
+  //font-family: "Franklin Gothic";
+  font-family: "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
   margin: 0 auto;
   width: 1020px;
   float:left;
@@ -100,10 +106,16 @@ body {
   width: 1020px;//width: 800px;
   float: left;
   background-color: #FFFFFF;
-  //padding-bottom: 10px;
-  //padding-top: 10px;
-  border: 2px solid;
-  border-radius: 25px;
+  //border: 2px solid;
+  //border-radius: 25px;
+  #content-selector-universities {
+    margin-bottom: -2px;//-10px;
+    margin-left: 10px;
+    margin-top: 2px;//10px;
+    position: absolute;
+    z-index: 1000;
+    display:none;
+  }
   #content-selector {
     margin-bottom: -2px;//-10px;
     margin-left: 10px;
@@ -148,5 +160,8 @@ span.ca-icon {
     height: 200px !important;//250px
 }
 h2.ca-main {
-  font-size: 22px !important;//25px
+  font-size: 22pt !important;//22px
+}
+h2.ca-sub {
+  font-size: 16pt !important;//22px
 }

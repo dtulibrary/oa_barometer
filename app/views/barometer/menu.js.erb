@@ -1,2 +1,3 @@
+$('#container1').html('<%=j render partial: 'barometer/universities_chart', locals: { scope: @selected_scope_universities } %>');
 $('#container3-2').html('<%=j render partial: 'barometer/top_topic_chart', locals: { topic: @selected_topic } %>');
 $('#container3-3').html('<%=j render partial: 'barometer/top_institution_chart', locals: { institution: @selected_institution } %>');

@@ -6,7 +6,7 @@
                             <span class="ca-icon">A</span>
                             <div class="ca-content">
                                 <h2 class="ca-main">Open Access Now</h2>
-                                <h3 class="ca-sub">Welcome to OA Barometer</h3>
+                                <h3 class="ca-sub">OA status in total</h3>
                             </div>
                         </a>
                     </li>
@@ -14,8 +14,8 @@
                         <a href="javascript:showVisualization(1);">
                             <span class="ca-icon">I</span>
                             <div class="ca-content">
-                                <h2 class="ca-main">Dataset Overview</h2>
-                                <h3 class="ca-sub">Which data is used?</h3>
+                                <h2 class="ca-main">Universities</h2>
+                                <h3 class="ca-sub">OA status by institution</h3>
                             </div>
                         </a>
                     </li>
@@ -23,8 +23,8 @@
                         <a href="javascript:showVisualization(2);">
                             <span class="ca-icon">C</span>
                             <div class="ca-content">
-                                <h2 class="ca-main">Open Access in Topics</h2>
-                                <h3 class="ca-sub">Which fields are in the lead?</h3>
+                                <h2 class="ca-main">Research areas</h2>
+                                <h3 class="ca-sub">OA status by field</h3>
                             </div>
                         </a>
                     </li>
@@ -32,8 +32,8 @@
                         <a href="javascript:showVisualization(3);">
                             <span class="ca-icon">S</span>
                             <div class="ca-content">
-                                <h2 class="ca-main">Top Journals</h2>
-                                <h3 class="ca-sub">Which journals are in the lead?</h3>
+                                <h2 class="ca-main">Top journals</h2>
+                                <h3 class="ca-sub">OAA status by top journals</h3>
                             </div>
                         </a>
                     </li>
@@ -41,8 +41,8 @@
                         <a href="javascript:showVisualization(4);">
                             <span class="ca-icon">d</span>
                             <div class="ca-content">
-                                <h2 class="ca-main">Unconditional Support</h2>
-                                <h3 class="ca-sub">24/7 for you needs</h3>
+                                <h2 class="ca-main">Boost your reasearch</h2>
+                                <h3 class="ca-sub">More about Open Access</h3>
                             </div>
                         </a>
                     </li>
@@ -50,9 +50,10 @@
         </div>
         <div id="content-wrapper">
         	<%= form_tag("menu", :id => "select-form", :remote => true) do |f|%>
-        	<%= select_tag "content-selector", options_for_select(@menu_items), onchange: "updated(this);" %>
+        	<%= select_tag "content-selector", options_for_select(@menu_items), onchange: "updated(this, 'top');" %>
         	<%= select_tag "sub-selector-topic", options_for_select(TOP_JSON["topics"].keys()), onchange: "updatedSub(this);", :class => "sub-selector" %>
         	<%= select_tag "sub-selector-institution", options_for_select(TOP_JSON["institutions"].keys()), onchange: "updatedSub(this);", :class => "sub-selector" %>
+        	<%= select_tag "content-selector-universities", options_for_select(@menu_items_universities), onchange: "updated(this, 'universities');" %>
         	<!--
         	<select name="select" id="content-selector" onchange="updated(this)">
 				<option value="1" selected="selected">Journals</option>
@@ -70,12 +71,12 @@
 	        	<canvas id="canvas" height="600" width="800">Canvas not available.</canvas>
 	        </div>
 	        <div id="container1" class="visualization"></div>
-	        <div id="container2" class="visualization">
-	        	
-	        </div>
+	        <div id="container2" class="visualization"></div>
 	        <div id="container3" class="visualization"></div>
 	        <div id="container3-2" class="visualization"></div>
 	        <div id="container3-3" class="visualization"></div>
+	       	<div id="container4" class="visualization"></div>
+	       	<div id="container5" class="visualization"></div>
         </div>
 
         </div> <!-- page end -->
@@ -94,6 +95,7 @@
 			function showVisualization(index){
 			  $('.visualization').hide();
 			  $('#content-selector').hide();
+			  $('#content-selector-universities').hide();
 			  $('.sub-selector').hide();
 			  //$('#sub-selector-topic').hide();
 			  $('#container'+index).show();
@@ -104,6 +106,8 @@
 			  if(index==0){ // animate oa barometer
 			  	render();
 			  	animate('currentPercentage', 0, 3000);
+			  } else if(index == 1){
+			  	$('#content-selector-universities').show();
 			  } else if(index == 3){
 			  	$('#content-selector').show();
 			  	//$('.sub-selector').hide();
@@ -138,28 +142,34 @@
 	//		  $('.ca-menu li:eq('+index+')').addClass('selected-menu');//.css('background-color','#EEDD82');
 			  
 			}
-			function updated(element)
+			
+			function updated(element, chart)
 			{
 				$('.sub-selector').hide();
 			    var idx=element.selectedIndex;
 			    var val=element.options[idx].value;
 			    var content=element.options[idx].innerHTML;
-			    //alert(val + " " + content);
-			    if(val == '<%=@menu_items[0]%>'){
-			    	//$('#sub-selector-topic').show();
-			  		$('#container3').show();
-			  		$('#container3-2').hide();
-			  		$('#container3-3').hide();
-			    } else if(val == '<%=@menu_items[1]%>'){
-			  		$('#sub-selector-topic').show();
-			  		$('#container3').hide();
-			  		$('#container3-2').show();
-			  		$('#container3-3').hide();
-			  	} else if(val == '<%=@menu_items[2]%>'){
-			  		$('#sub-selector-institution').show();
-			  		$('#container3').hide();
-			  		$('#container3-2').hide();
-			  		$('#container3-3').show();
+			    
+			    if(chart == 'top'){
+				    //alert(val + " " + content);
+				    if(val == '<%=@menu_items[0]%>'){
+				    	//$('#sub-selector-topic').show();
+				  		$('#container3').show();
+				  		$('#container3-2').hide();
+				  		$('#container3-3').hide();
+				    } else if(val == '<%=@menu_items[1]%>'){
+				  		$('#sub-selector-topic').show();
+				  		$('#container3').hide();
+				  		$('#container3-2').show();
+				  		$('#container3-3').hide();
+				  	} else if(val == '<%=@menu_items[2]%>'){
+				  		$('#sub-selector-institution').show();
+				  		$('#container3').hide();
+				  		$('#container3-2').hide();
+				  		$('#container3-3').show();
+				  	}
+			  	} else if(chart == 'universities'){
+			  		// nothing special to do...
 			  	}
 			   	$('form#select-form').trigger('submit.rails');
 			    			  
@@ -179,9 +189,12 @@
         </script>
         <%=render :partial => "barometer/oa_barometer_chart"%>
         <script type="text/javascript">
-        	<%=render :partial => "barometer/drilldownchart"%> // container2
-        	<%=render :partial => "barometer/reingold_tilford_tree"%> // container1
+        	<%=render :partial => "barometer/drilldownchart"%> // container5
+        	<%=render :partial => "barometer/reingold_tilford_tree"%> // container4
 		</script>
+		<%=render :partial => "barometer/universities_chart", locals: { scope: @selected_scope_universities }%> <!-- container1 -->
+		<%=render :partial => "barometer/reasearch_area_chart"%> <!-- container2 -->
 		<%=render :partial => "barometer/top_journal_chart"%> <!-- container3 -->
-		<%=render :partial => "barometer/top_topic_chart", locals: { topic: @selected_topic }%> <!-- container3-2 -->		
+		<%=render :partial => "barometer/top_topic_chart", locals: { topic: @selected_topic }%> <!-- container3-2 -->
+		<%=render :partial => "barometer/top_institution_chart", locals: { institution: @selected_institution } %> <!-- container3-3 -->		
 
