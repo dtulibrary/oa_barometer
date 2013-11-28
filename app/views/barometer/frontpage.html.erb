@@ -33,7 +33,7 @@
                             <span class="ca-icon">S</span>
                             <div class="ca-content">
                                 <h2 class="ca-main">Top journals</h2>
-                                <h3 class="ca-sub">OAA status by top journals</h3>
+                                <h3 class="ca-sub">OA status by top journals</h3>
                             </div>
                         </a>
                     </li>
@@ -67,7 +67,7 @@
 				<option value="4">soc</option>
 			</select>        -->
         	<%end%>
-        	<div class="container-overlay">
+        	<div id="overlay-total" class="container-overlay">
         		<div class="overlay-header">TOTAL OPEN ACCESS 2011</div>
         		<div class="overlay-right">
         			Click to see the potential amount of Open Access
@@ -79,6 +79,32 @@
         			</p>
         		</div>
         	</div>
+        	
+        	<div id="overlay-potential" class="container-overlay">
+        		<div class="overlay-header">POTENTIAL OPEN ACCESS 2011</div>
+        		<div class="overlay-right">
+        			Click to see the total amount of Open Access
+        		</div>
+        		<div class="overlay-left">
+        			Percentage of journal articles from 2011, published by authors from Danish universities, that is permitted to be available for free download (Open Access) in either local depositories or in OA journals.
+        			<p>
+        				This includes all article versions (preprint, postprint and publisher’s version). Journals are defined as Open Access when listed at DOAJ.org
+        			</p>
+        		</div>
+        	</div>
+
+        	
+        	<div class="slider-overlay">
+        		<ul class="bxslider">
+        			<li>
+	        			<img height="500" width="800">Canvas not available.</img>
+        			</li>
+        			<li>
+	        			<img height="500" width="800">Canvas not available.</img>
+        			</li>
+        		</ul>
+        	</div>
+        	
 	        <div id="container0" class="visualization">
 	        	<canvas id="canvas" height="600" width="800">Canvas not available.</canvas>
 	        </div>
@@ -93,9 +119,32 @@
 
         </div> <!-- page end -->
         <script type="text/javascript">
+        	var currentOverlay = 0;
         	$(document).ready(function(){
+        		var slider = $('.bxslider').bxSlider({
+				  mode: 'fade',
+				  
+					onSlideAfter: function($slideElement, oldIndex, newIndex){
+						$('.container-overlay').hide();
+						if(newIndex == 0){
+							$('#overlay-total').show();
+							currentOverlay = 0;
+						} else if(newIndex == 1){
+							$('#overlay-potential').show();
+							currentOverlay = 1;
+						}
+					}
+				});
+				/*
+				$('#slider-next').click(function(){
+				  slider.goToNextSlide();
+				  return false;
+				});*/
+        		
 			  // show only container for the first slide when page is initially loaded.
 			  //$('.selected-menu').css('background-color','#EEDD82');
+			  $('.container-overlay').hide();
+			  $('#overlay-total').show();
 			  $('.visualization').hide();
 			  $('#container<%=(@selected_item.nil? ? 0 : @selected_item)%>').show();
 			  $('.ca-menu li').click(function() {
@@ -106,6 +155,7 @@
 			});
 			function showVisualization(index){
 			  $('.visualization').hide();
+			  $('.slider-overlay').hide();
 			  $('.container-overlay').hide();
 			  $('#content-selector').hide();
 			  $('#content-selector-universities').hide();
@@ -117,7 +167,12 @@
 				'currentPercentage': 0.0
 				};
 			  if(index==0){ // animate oa barometer
-			  	$('.container-overlay').show();
+			  	if(currentOverlay == 0){
+			  		$('#overlay-total').show();//TODO: fix this! //$('.container-overlay').show();
+			  	} else if(currentOverlay == 1){
+			  		$('#overlay-potential').show();//TODO: fix this! //$('.container-overlay').show();
+			  	}
+			  	$('.slider-overlay').show();
 			  	render();
 			  	animate('currentPercentage', 0, 3000);
 			  } else if(index == 1){
