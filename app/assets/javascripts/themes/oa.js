@@ -19,13 +19,13 @@ Highcharts.theme = {
         },
         title: {
                 style: {
-                        color: '#3E576F',
+                        color: '#336666',//'#3E576F',
                         font: '16px Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, Arial, sans-serif'
                 }
         },
         subtitle: {
                 style: {
-                        color: '#6D869F',
+                        color: '#336666',//color: '#6D869F',
                         font: '12px Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, Arial, sans-serif'
                 }
         },
@@ -35,13 +35,13 @@ Highcharts.theme = {
                 tickColor: '#C0D0E0',
                 labels: {
                         style: {
-                                color: '#666',
+                                color: '#336666',//color: '#666',
                                 fontWeight: 'bold'
                         }
                 },
                 title: {
                         style: {
-                                color: '#666',
+                                color: '#336666',//color: '#666',
                                 font: '12px Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, Arial, sans-serif'
                         }
                 }
@@ -53,13 +53,13 @@ Highcharts.theme = {
                 tickWidth: 1,
                 labels: {
                         style: {
-                                color: '#666',
+                                color: '#336666',//color: '#666',
                                 fontWeight: 'bold'
                         }
                 },
                 title: {
                         style: {
-                                color: '#666',
+                                color: '#336666',//color: '#666',
                                 font: '12px Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, Arial, sans-serif'
                         }
                 }
@@ -67,18 +67,18 @@ Highcharts.theme = {
         legend: {
                 itemStyle: {
                         font: '9pt Trebuchet MS, Verdana, sans-serif',
-                        color: '#3E576F'
+                        color: '#336666',//color: '#3E576F'
                 },
                 itemHoverStyle: {
-                        color: 'black'
+                        color: '#336666',//color: 'black'
                 },
                 itemHiddenStyle: {
-                        color: 'silver'
+                        color: '#336666',//color: 'silver'
                 }
         },
         labels: {
                 style: {
-                        color: '#3E576F'
+                        color: '#336666',//color: '#3E576F'
                 }
         }
 };

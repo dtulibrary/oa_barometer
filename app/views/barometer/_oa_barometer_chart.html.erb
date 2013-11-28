@@ -83,7 +83,7 @@ function applyDefaultContextSettings(options) {
 	options.ctx.strokeStyle = "rgb(255, 255, 255)";
 	options.ctx.fillStyle = 'rgb(255,255,255)';
 	options.ctx.textAlign = 'center';
-	options.ctx.font = options.fontSize+"pt Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, Arial, sans-serif";//Helvetica bold, sans-serif";
+	options.ctx.font = "bold "+options.fontSize+"pt Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, Arial, sans-serif";//Helvetica bold, sans-serif";
 	options.lineOffset = options.ctx.lineWidth * 0.5;
 }
 
@@ -92,7 +92,7 @@ function buildOptionsAsJSON(canvas) {
 	* Alter these to modify its look and feel
 	*/
 	var centerX = 400,
-	centerY = 300,
+	centerY = 400,//300,
 	radius = 120,
 	outerRadius = 120;
 	
@@ -115,7 +115,7 @@ function buildOptionsAsJSON(canvas) {
 	fontSize: 14,
 	color: {
 		oaOrange: "#ff9933",//"rgb(255, 165, 0)",//"rgb(255, 127, 0)",//"orange",//"rgb(255, 140, 0)",//
-		oaFill: "#6D869F"//"#ccffff"//"rgb(238, 221, 130)"//"rgb(255, 215, 0)"//"yellow"
+		oaFill: "#B8DBFF"//"#6D869F"//"#ccffff"//"rgb(238, 221, 130)"//"rgb(255, 215, 0)"//"yellow"
 	},
 	};
 }
@@ -265,7 +265,8 @@ function drawInnerCircle(options){
  
     // Fill the last object
     options.ctx.fill();
-    options.ctx.fillStyle = "black";
+    options.ctx.fillStyle = "#B8DBFF";//"black";
+    options.ctx.font = options.ctx.font;
     label = Math.round(animationObject.currentPercentage * 100) + "%";
     options.ctx.fillText(label, options.center.X, options.center.Y + (options.fontSize / 2));
     

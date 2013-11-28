@@ -5,7 +5,7 @@
   font: 10px sans-serif;
   circle {
     fill: #fff;
-    stroke: steelblue;
+    stroke: #336666;//steelblue;
     stroke-width: 1.5px;
   }
 }
@@ -24,24 +24,59 @@ body {
    height:100%;
    //font-family: "Franklin Gothic Medium";
    font-family: "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Gothic", Arial, sans-serif;
-   background: #6D869F; //#ccffff;//#cccccc;// url(../images/beige_paper.png) repeat top left;
+   background: #CCE6FF;//#6D869F; //#ccffff;//#cccccc;// url(../images/beige_paper.png) repeat top left;
+   color: #336666;
 }
 #container {
    min-width:100%;
    min-height:100%;
    position:relative;
+   color:#336666;
+}
+.container-overlay{
+  //display:none;
+  position:absolute;
+  width: 1020px;
+  //width:1020px;
+  //margin: 0 auto;
+  .overlay-header{
+    //color: #336666;
+    margin-top: 65px;
+    margin-left: 270px;
+    font-size: 26pt;
+    font-weight: bold;
+  }
+  .overlay-left{    font-weight: bold;
+    line-height: 20pt;
+    margin-left: 50px;
+    margin-top: 80px;//125px;
+    width: 250px;
+    height: 350px;
+    p {
+      margin-top:25px;
+      font-weight: normal;
+      font-size: 10pt;
+      line-height: 15pt;
+    }
+  }
+  .overlay-right {
+    float: right;
+    font-weight: bold;
+    line-height: 20pt;
+    margin-right: 75px;
+    margin-top: 300px;
+    text-align: center;
+    width: 250px;
+  }
 }
 #page-header {
-   background:#99ccff;//#FFA500;
+   background: #B8DBFF;//#9BB4CD;//#78C7C2; //#94D4E9;//#ACD6FF;//#99ccff;//#FFA500;
    padding:25px;//60px;
    margin-top: -20px; //TODO: remove this... make it work some other way...
    //box-shadow: 0px 10px 5px #FFA500;//#EEDD82;//#888888;
-   h1{
-     font-weight:bold;
-   }
-   h3{
-     text-align: center;
-     font-style:italic;
+   #headerImage {
+     margin: 0 auto;
+     width:1020px;
    }
 }
 #page {
@@ -58,27 +93,29 @@ body {
    width:100%;
    //height:75px;   /* Height of the footer */
    //padding:10px;
-   background:#33cccc;//#99ccff;//#FFA500;
+   background:#69ADAD;//#439999;//#7FCCCC;//5FBFBF;//#33cccc;//#99ccff;//#FFA500;
    //box-shadow: 0px -10px 5px #FFA500;//#EEDD82;//#888888;
    padding-top: 10px;
    margin-top: 10px;
-   table {
-     //margin: 25px auto 0;
-     margin: 25px auto;
-     text-align: center;
-     width: 1020px;
-     font-weight: bold;
-     td {
-       text-align: left;
-       width: 250px;
-       margin-right: 5px;
-       p{
-         font-weight: none;
-         font-size: 10pt;
-       }
+   footer {
+     width:1020px;
+     margin: 0 auto;
+     div {
+      text-align: left;
+      font-weight: none;
+      font-size: 10pt;
+      color:#336666;
+      float: left;
+      width: 225px;
+      margin-right: 35px;
+      a{
+        font-weight:bold;
+        color:#336666;
+      }
      }
-     a {
-       color: black;//#EEDD82;
+     div.datafacts{
+       float:right;
+       margin-right: 0px;
      }
    }
 }
@@ -164,14 +201,18 @@ nav {
 span.ca-icon {
   font-size: 40px !important;
   line-height: 100px !important;//135px
+  color: #336666 !important;
 }
 .ca-menu li{
     width: 200px;
     height: 200px !important;//250px
+    color: #336666 !important;
 }
 h2.ca-main {
   font-size: 22pt !important;//22px
+  color: #336666 !important;
 }
 h2.ca-sub {
   font-size: 16pt !important;//22px
+  color: #336666 !important;
 }

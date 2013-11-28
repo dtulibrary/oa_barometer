@@ -93,7 +93,7 @@
     transition: all 200ms linear;
 }
 .ca-menu li:hover{
-    background-color: #EEDD82;//#000;
+    background-color: #CCE6FF;//#EEDD82;//#000;
 }
 .ca-menu li:hover .ca-icon{
     color: #f58021;//#FFA500;//#ff2020;
@@ -108,8 +108,10 @@
     -ms-animation: smallToBig 300ms ease;
 }
 .ca-menu li:hover .ca-sub{
-    color: #000;
-    background-color: #FFA500;//#ff2020;
+    //color: #000;
+    color: white;
+    //background-color: #FFA500;//#ff2020;
+    background-color: #69ADAD;
     -webkit-animation: moveFromBottom 500ms ease;
     -moz-animation: moveFromBottom 500ms ease;
     -ms-animation: moveFromBottom 500ms ease;
@@ -167,23 +169,27 @@
 
 //custom additions
 li.selected-menu {
-    background-color: #EEDD82;//#000;
+    //background-color: #EEDD82;//#000;
+    background-color: #69ADAD;//#7FCCCC;
 }
 li.selected-menu .ca-icon{
-    color: #f58021;//#FFA500;//#ff2020;
+    //color: #f58021;//#FFA500;//#ff2020;
+    color:#336666;
     -webkit-animation: moveFromBottom 300ms ease;
     -moz-animation: moveFromBottom 300ms ease;
     -ms-animation: moveFromBottom 300ms ease;
 }
 li.selected-menu .ca-main{
-    color: #f58021;//#FFA500;//#ff2020;
+    //color: #f58021;//#FFA500;//#ff2020;
+    color:#336666;
     -webkit-animation: smallToBig 300ms ease;
     -moz-animation: smallToBig 300ms ease;
     -ms-animation: smallToBig 300ms ease;
 }
 li.selected-menu .ca-sub{
-    color: #000;
-    background-color: #FFA500;//#ff2020;
+    //color: #000;
+    color:white;//#336666;
+    background-color: #69ADAD;//#7FCCCC;//#FFA500;//#ff2020;
     -webkit-animation: moveFromBottom 500ms ease;
     -moz-animation: moveFromBottom 500ms ease;
     -ms-animation: moveFromBottom 500ms ease;

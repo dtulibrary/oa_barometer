@@ -41,7 +41,7 @@
                         <a href="javascript:showVisualization(4);">
                             <span class="ca-icon">d</span>
                             <div class="ca-content">
-                                <h2 class="ca-main">Boost your reasearch</h2>
+                                <h2 class="ca-main">Boost your research</h2>
                                 <h3 class="ca-sub">More about Open Access</h3>
                             </div>
                         </a>
@@ -67,6 +67,18 @@
 				<option value="4">soc</option>
 			</select>        -->
         	<%end%>
+        	<div class="container-overlay">
+        		<div class="overlay-header">TOTAL OPEN ACCESS 2011</div>
+        		<div class="overlay-right">
+        			Click to see the potential amount of Open Access
+        		</div>
+        		<div class="overlay-left">
+        			Percentage of journal articles from 2011, published by authors from Danish universities, that is available for free download in either local depositories or in Open Access journals.
+        			<p>
+        				This includes all article versions (preprint, postprint and publisher’s version). Journals are defined as Open Access when listed at DOAJ.org
+        			</p>
+        		</div>
+        	</div>
 	        <div id="container0" class="visualization">
 	        	<canvas id="canvas" height="600" width="800">Canvas not available.</canvas>
 	        </div>
@@ -94,6 +106,7 @@
 			});
 			function showVisualization(index){
 			  $('.visualization').hide();
+			  $('.container-overlay').hide();
 			  $('#content-selector').hide();
 			  $('#content-selector-universities').hide();
 			  $('.sub-selector').hide();
@@ -104,6 +117,7 @@
 				'currentPercentage': 0.0
 				};
 			  if(index==0){ // animate oa barometer
+			  	$('.container-overlay').show();
 			  	render();
 			  	animate('currentPercentage', 0, 3000);
 			  } else if(index == 1){
