@@ -63,6 +63,7 @@ body {
   //display:none;
   position:absolute;
   width: 1020px;
+  z-index: 1001;
   //width:1020px;
   //margin: 0 auto;
   .overlay-header{
@@ -97,8 +98,8 @@ body {
 }
 #page-header {
    background: #B8DBFF;//#9BB4CD;//#78C7C2; //#94D4E9;//#ACD6FF;//#99ccff;//#FFA500;
-   padding:25px;//60px;
-   margin-top: -20px; //TODO: remove this... make it work some other way...
+   //padding:25px;//60px;
+   //margin-top: -20px;
    //box-shadow: 0px 10px 5px #FFA500;//#EEDD82;//#888888;
    #headerImage {
      margin: 0 auto;
@@ -138,6 +139,11 @@ body {
       a{
         font-weight:bold;
         color:#336666;
+      }
+      img{
+        height: 60px;
+        margin-bottom: 10px;
+        margin-top: 10px;
       }
      }
      div.datafacts{
@@ -208,6 +214,30 @@ body {
     position: absolute;
     z-index: 1000;
     display:none;
+  }
+  .text{
+    float:left;
+    text-align:left;
+    width:500px;
+    margin: 50px;
+    .title{
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .subtitle{
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      margin-top: 15px;
+    }
+  }
+  .image{
+    float:right;
+    margin: 50px;
+    img {
+      height: 550px;
+    }
   }
 }
 .visualization{

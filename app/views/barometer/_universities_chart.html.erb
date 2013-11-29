@@ -6,7 +6,10 @@
                 type: 'bar'
             },
             title: {
-                text: 'Universities <%=scope%>'
+                text: 'Universities in Denmark'
+            },
+            subtitle: {
+                text: 'Number of <%=(scope.eql?("OA") ? "open access " : "")%>journal articles published by Danish universities in 2011.'
             },
             xAxis: {
                 categories: [

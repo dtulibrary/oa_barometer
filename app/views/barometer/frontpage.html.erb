@@ -32,8 +32,8 @@
                         <a href="javascript:showVisualization(3);">
                             <span class="ca-icon">S</span>
                             <div class="ca-content">
-                                <h2 class="ca-main">Top journals</h2>
-                                <h3 class="ca-sub">OA status by top journals</h3>
+                                <h2 class="ca-main">Journals</h2>
+                                <h3 class="ca-sub">OA status by main journals</h3>
                             </div>
                         </a>
                     </li>
@@ -73,9 +73,9 @@
         			Click to see the potential amount of Open Access
         		</div>
         		<div class="overlay-left">
-        			Percentage of journal articles from 2011, published by authors from Danish universities, that is available for free download in either local depositories or in Open Access journals.
+        			Percentage of peer reviewed journal articles from 2011, published by authors from all Danish universities, that is available for free download in either local repositories or in Open Access journals.
         			<p>
-        				This includes all article versions (preprint, postprint and publisher’s version). Journals are defined as Open Access when listed at DOAJ.org
+        				This includes following articles versions (postprint, publisher’s version). Journals are defined as Open Access when listed at <a href="http://www.doaj.org/">DOAJ.org</a>
         			</p>
         		</div>
         	</div>
@@ -86,9 +86,9 @@
         			Click to see the total amount of Open Access
         		</div>
         		<div class="overlay-left">
-        			Percentage of journal articles from 2011, published by authors from Danish universities, that is permitted to be available for free download (Open Access) in either local depositories or in OA journals.
+        				Percentage of peer reviewed journal articles from 2011, published by authors from all Danish universities, that is available for free download in either local repositories or in Open Access journals.
         			<p>
-        				This includes all article versions (preprint, postprint and publisher’s version). Journals are defined as Open Access when listed at DOAJ.org
+        				This includes all articles in journals that according to SHERPA/RoMEO allows deposit of postprints and publishers version) and articles published in Open Access journals listed in <a href="http://www.doaj.org/">DOAJ.org</a>
         			</p>
         		</div>
         	</div>
@@ -113,7 +113,9 @@
 	        <div id="container3" class="visualization"></div>
 	        <div id="container3-2" class="visualization"></div>
 	        <div id="container3-3" class="visualization"></div>
-	       	<div id="container4" class="visualization"></div>
+	       	<div id="container4" class="visualization">
+	       		<%=render :partial => "barometer/boost_research"%>
+	       	</div>
 	       	<div id="container5" class="visualization"></div>
         </div>
 
@@ -258,8 +260,7 @@
         </script>
         <%=render :partial => "barometer/oa_barometer_chart"%>
         <script type="text/javascript">
-        	<%=render :partial => "barometer/drilldownchart"%> // container5
-        	<%=render :partial => "barometer/reingold_tilford_tree"%> // container4
+        	<%=render :partial => "barometer/reingold_tilford_tree"%> // container5
 		</script>
 		<%=render :partial => "barometer/universities_chart", locals: { scope: @selected_scope_universities }%> <!-- container1 -->
 		<%=render :partial => "barometer/reasearch_area_chart"%> <!-- container2 -->
