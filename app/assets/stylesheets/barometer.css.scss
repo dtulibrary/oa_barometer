@@ -136,9 +136,14 @@ body {
       float: left;
       width: 225px;
       margin-right: 35px;
-      a{
+      .footer-title{
         font-weight:bold;
+        font-weight: bold;
+      }
+      a{
+        //#font-weight:bold;
         color:#336666;
+        text-decoration: underline;
       }
       img{
         height: 60px;
