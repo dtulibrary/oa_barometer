@@ -7,7 +7,7 @@ class BarometerController < ApplicationController
   end
   
   def frontpage
-    @menu_items = ["Journals", "Topics", "Institutions"]
+    @menu_items = ["Journals", "Research areas", "Universities"]##["Journal", "Research area", "Institution"] #"Topics",
     @selected_topic = (@selected_topic.nil? ? TOP_JSON["topics"].keys()[0] : @selected_topic)
     @selected_institution = (@selected_institution.nil? ? TOP_JSON["institutions"].keys()[0] : @selected_institution)
     

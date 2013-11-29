@@ -5,10 +5,10 @@ $('#container3-3').highcharts({
                 type: 'bar'
             },
             title: {
-                text: 'Top Journals for Institution'
+                text: 'University'
             },
             subtitle: {
-                text: 'Ordered by Publications. Coloring indicates Open Access availablity (DOAJ Journal).'
+                text: 'Number of journal articles published in the top 20 most used journals by Danish universities in 2011.'
             },
             xAxis: {
                 categories: [
@@ -55,7 +55,7 @@ $('#container3-3').highcharts({
 		                            '</h3>'+
 		                            '<br></br>'+
 		                            '<h3 style="text-align: center;">'+
-		                            'Open Access: '+(this.color=='Orange' ? 'Yes' : 'No')+''+
+		                            'DOAJ journal: '+(this.color=='Orange' ? 'Yes' : 'No')+''+
 		                            '</h3>',
 		                            width: "50%"
 		                            });
