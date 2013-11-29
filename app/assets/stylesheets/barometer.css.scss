@@ -266,10 +266,28 @@ span.ca-icon {
     color: #336666 !important;
 }
 h2.ca-main {
-  font-size: 22pt !important;//22px
+  font-size: 20pt !important;//22px
   color: #336666 !important;
 }
 h2.ca-sub {
   font-size: 16pt !important;//22px
   color: #336666 !important;
+}
+
+span.ca-icon {
+  display: none !important;
+}
+.ca-content {
+    height: 100% !important;
+    top: 0 !important;
+    h2 {
+      //padding-top: 40px;
+      padding: 35px 10px 10px;
+    }
+    h3 {
+      padding-left: 10px;
+    }
+    h2, h3 {
+      text-align: left !important;
+    }
 }
