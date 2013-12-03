@@ -28,6 +28,7 @@ body {
    color: #336666;
 }
 #container {
+  font-family: Arial, sans-serif;
    min-width:100%;
    min-height:100%;
    position:relative;
@@ -64,7 +65,7 @@ body {
   position:absolute;
   width: 1020px;
   z-index: 1001;
-  font-size: 16px;
+  font-size: 18px;
   //width:1020px;
   //margin: 0 auto;
   .overlay-header{
@@ -75,25 +76,25 @@ body {
     font-weight: bold;
   }
   .overlay-left{    font-weight: bold;
-    line-height: 21px;
-    margin-left: 65px;
+    line-height: 23px;
+    margin-left: 84px;
     margin-top: 80px;//125px;
     width: 250px;
     height: 350px;
     p {
       margin-top:25px;
       font-weight: normal;
-      font-size: 12px;
-      line-height: 18px;
+      font-size: 14px;
+      line-height: 19px;
     }
   }
   .overlay-right {
     float: right;
     font-weight: bold;
-    line-height: 21px;
-    margin-right: 75px;
+    line-height: 23px;
+    margin-right: 84px;
     margin-top: 155px;//300px;
-    text-align: center;
+    text-align: right;
     width: 250px;
   }
 }
@@ -225,15 +226,19 @@ body {
   .text{
     float:left;
     text-align:left;
+    line-height: 16px;
     width:500px;
     margin: 50px;
+    p {
+      font-size: 16px;
+    }
     .title{
       font-size: 22px;
       font-weight: bold;
       margin-bottom: 10px;
     }
     .subtitle{
-      font-size: 18px;
+      //font-size: 18px;
       font-weight: bold;
       margin-bottom: 5px;
       margin-top: 15px;
