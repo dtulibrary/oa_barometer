@@ -20,13 +20,13 @@ Highcharts.theme = {
         title: {
                 style: {
                         color: '#336666',//'#3E576F',
-                        font: '16px Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, Arial, sans-serif'
+                        font: '18px Arial, sans-serif'
                 }
         },
         subtitle: {
                 style: {
                         color: '#336666',//color: '#6D869F',
-                        font: '12px Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, Arial, sans-serif'
+                        font: '14px Arial, sans-serif'
                 }
         },
         xAxis: {
@@ -42,7 +42,7 @@ Highcharts.theme = {
                 title: {
                         style: {
                                 color: '#336666',//color: '#666',
-                                font: '12px Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, Arial, sans-serif'
+                                font: '14px Arial, sans-serif'
                         }
                 }
         },
@@ -60,13 +60,13 @@ Highcharts.theme = {
                 title: {
                         style: {
                                 color: '#336666',//color: '#666',
-                                font: '12px Franklin Gothic Medium, Franklin Gothic, ITC Franklin Gothic, Arial, sans-serif'
+                                font: '14px Arial, sans-serif'
                         }
                 }
         },
         legend: {
                 itemStyle: {
-                        font: '9pt Trebuchet MS, Verdana, sans-serif',
+                        font: '12px Arial, sans-serif',
                         color: '#336666',//color: '#3E576F'
                 },
                 itemHoverStyle: {
