@@ -54,18 +54,6 @@
         	<%= select_tag "sub-selector-topic", options_for_select(TOP_JSON["topics"].keys()), onchange: "updatedSub(this);", :class => "sub-selector" %>
         	<%= select_tag "sub-selector-institution", options_for_select(TOP_JSON["institutions"].keys()), onchange: "updatedSub(this);", :class => "sub-selector" %>
         	<%= select_tag "content-selector-universities", options_for_select(@menu_items_universities), onchange: "updated(this, 'universities');" %>
-        	<!--
-        	<select name="select" id="content-selector" onchange="updated(this)">
-				<option value="1" selected="selected">Journals</option>
-				<option value="2">Topics</option>
-				<option value="3">Institutions</option>
-			</select>
-			<select name="select" id="sub-selector-topic" class="sub-selector" onchange="updatedSub(this)">
-				<option value="1" selected="selected">hum</option>
-				<option value="2">med</option>
-				<option value="3">sci</option>
-				<option value="4">soc</option>
-			</select>        -->
         	<%end%>
         	<div id="overlay-total" class="container-overlay">
         		<div class="overlay-header">TOTAL OPEN ACCESS 2011</div>
@@ -147,14 +135,8 @@
 		  				animate('currentPercentage', 0, 3000);
 					}
 				});
-				/*
-				$('#slider-next').click(function(){
-				  slider.goToNextSlide();
-				  return false;
-				});*/
         		
 			  // show only container for the first slide when page is initially loaded.
-			  //$('.selected-menu').css('background-color','#EEDD82');
 			  $('.container-overlay').hide();
 			  $('#overlay-total').show();
 			  $('.visualization').hide();
@@ -163,8 +145,8 @@
 			  	$('.ca-menu li').removeClass('selected-menu');
     		 	$(this).addClass('selected-menu');
 			  });
-			  
 			});
+			
 			function showVisualization(index){
 			  $('.visualization').hide();
 			  $('.slider-overlay').hide();
@@ -216,16 +198,6 @@
 			  		$('#container'+index+'-3').show();
 			  	}
 			  }
-			  
-			  
-//			  $('.ca-menu li').removeClass('selected-menu');//.css('background-color','#fff');
-			  // $('.ca-menu li').hover(function(){
-			  	// $('.ca-menu li').css('background-color','#EEDD82');
-			  // },function(){
-			  	// $('.ca-menu li').css('background-color','#fff');
-			  // });
-	//		  $('.ca-menu li:eq('+index+')').addClass('selected-menu');//.css('background-color','#EEDD82');
-			  
 			}
 			
 			function updated(element, chart)
@@ -261,15 +233,7 @@
 			}
 			function updatedSub(element)
 			{
-			    // var idx=element.selectedIndex;
-			    // var val=element.options[idx].value;
-			    // var content=element.options[idx].innerHTML;
-			    // alert(val + " " + content);
-			    // if(val == 2){
-			    	// //$('#sub-selector-topic').show();
-			    // }
 			    $('form#select-form').trigger('submit.rails');
-			    //TODO: make this update visualization...!
 			}
         </script>
         <%=render :partial => "barometer/oa_barometer_chart"%>

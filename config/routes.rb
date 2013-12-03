@@ -1,5 +1,4 @@
 OaBarometer::Application.routes.draw do
-  get "barometer/index"
   get "barometer/frontpage"
   get "barometer/rt_tree", :as => :rt_tree
   post "barometer/menu"

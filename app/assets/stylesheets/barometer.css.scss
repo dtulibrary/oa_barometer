@@ -64,17 +64,18 @@ body {
   position:absolute;
   width: 1020px;
   z-index: 1001;
+  font-size: 16px;
   //width:1020px;
   //margin: 0 auto;
   .overlay-header{
     //color: #336666;
     margin-top: 65px;
     margin-left: 270px;
-    font-size: 26pt;
+    font-size: 34px;
     font-weight: bold;
   }
   .overlay-left{    font-weight: bold;
-    line-height: 20pt;
+    line-height: 21px;
     margin-left: 65px;
     margin-top: 80px;//125px;
     width: 250px;
@@ -82,14 +83,14 @@ body {
     p {
       margin-top:25px;
       font-weight: normal;
-      font-size: 10pt;
-      line-height: 15pt;
+      font-size: 12px;
+      line-height: 18px;
     }
   }
   .overlay-right {
     float: right;
     font-weight: bold;
-    line-height: 20pt;
+    line-height: 21px;
     margin-right: 75px;
     margin-top: 155px;//300px;
     text-align: center;
@@ -139,6 +140,7 @@ body {
       .footer-title{
         font-weight:bold;
         font-size: 11pt;
+        padding-bottom: 4px;
       }
       a{
         //#font-weight:bold;
@@ -271,12 +273,16 @@ span.ca-icon {
     color: #336666 !important;
 }
 h2.ca-main {
-  font-size: 20pt !important;//22px
+  font-size: 25px !important;//22px
   color: #336666 !important;
+  line-height: 30px;
 }
 h2.ca-sub {
   font-size: 16pt !important;//22px
   color: #336666 !important;
+}
+h3.ca-sub {
+  font-size: 13px !important;//22px
 }
 
 span.ca-icon {

@@ -15,7 +15,7 @@ var svg = d3.select("#container5").append("svg")
   .append("g")
     .attr("transform", "translate(" + diameter / 2 + "," + hdim / 2 + ")"); // diameter / 2
 
-d3.json("/rt_tree.json", function(error, root) { //reingold_tilford_tree.json
+d3.json("/rt_tree.json", function(error, root) {
   var nodes = tree.nodes(root),
       links = tree.links(nodes);
 
