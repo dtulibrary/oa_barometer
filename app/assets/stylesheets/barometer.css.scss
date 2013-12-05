@@ -71,9 +71,12 @@ body {
   .overlay-header{
     //color: #336666;
     margin-top: 65px;
-    margin-left: 270px;
+    //margin-left: 270px;
     font-size: 34px;
     font-weight: bold;
+    p {
+      text-align: center;
+    }
   }
   .overlay-left{    font-weight: bold;
     line-height: 23px;
@@ -138,9 +141,13 @@ body {
       float: left;
       width: 225px;
       margin-right: 35px;
+      p {
+        font-size: 14px;
+        line-height: 16px;
+      }
       .footer-title{
         font-weight:bold;
-        font-size: 11pt;
+        font-size: 14px;
         padding-bottom: 4px;
       }
       a{
@@ -258,6 +265,20 @@ body {
   height: 600px;
   margin: 0 auto;
 }
+.sliderChart {
+    margin: 0 auto;
+    padding-left: 110px;
+    padding-right: 110px;
+    padding-top: 125px;//25px;
+    padding-bottom: 50px;//25px;
+    min-width: 800px;//800px;
+    max-width: 800px;//800px;
+    height: 450px; //550px;
+    /*div {
+      z-index: 1002 !important;
+    }*/
+}
+
 #svgCanvas,#canvas{
   display: block;
   margin: 25px auto 0;

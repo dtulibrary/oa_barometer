@@ -1,24 +1,42 @@
-
-				
-				
+<script type="text/javascript">
+$(function () {
 				// Spider web
-				$('#container1').highcharts({ 
+				$('#container0-2').highcharts({ 
 				    chart: {
 				        polar: true,
-				        type: 'line'
+				        type: 'line',
+				        plotBorderWidth: 0,
+				        borderRadius: 0,
+				        borderWidth: 0,
+				        plotShadow: false,
+				        //backgroundColor:'transparent',
+				        //opacity: 0
+				        //style:{filter:'alpha(opacity=10)',opacity:10,background:'transparent'}
+				        backgroundColor:'rgba(255, 255, 255, 0.0)'
 				    },
 				    title: {
-				        text: 'Open Access in Topic',
+				        text: null,//'Open Access 2011',
 				        x: -80
 				    },
+				        			     plotOptions: {
+	                line: {
+                    dataLabels: {
+                        enabled: true,
+                        format: '<span style="color:{series.color}"><b>{point.y:,.0f} %</b><br/>'
+                    },
+                    enableMouseTracking: false
+                }
+            },
 				    pane: {
 				    	size: '80%'
 				    },
 				    xAxis: {
 				        categories: [
-				        	<%BAROMETER_JSON["topics"].keys().each_with_index do |topic,index|%>
-				        		<%="'#{topic}'#{(index==BAROMETER_JSON["topics"].keys().size-1 ? '': ',')}".html_safe%>
-				        	<%end%>
+				        	'total',
+				        <%BAROMETER_JSON["general"]["oa_potential_hybrid"]["topics"].keys().each_with_index do |topic, t_index|%>
+				        	'<%=topic%>'
+				        	<%="#{(BAROMETER_JSON["general"]["oa_potential_hybrid"]["topics"].keys().size-1 == t_index ? '' : ',')}"%>
+				        <%end%>
 				        		],
 				        tickmarkPlacement: 'on',
 				        lineWidth: 0
@@ -30,78 +48,46 @@
 				    },
 				    tooltip: {
 				    	shared: true,
-				        pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}</b><br/>'
+				        pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f} %</b><br/>'
 				    },
 				    legend: {
-				        align: 'right',
-				        verticalAlign: 'top',
-				        y: 70,
-				        layout: 'vertical'
-				    },
+		                backgroundColor: '#FFFFFF',
+		                reversed: true
+            		},
+				    /*
+				    legend: {
+				        align: 'center',
+				        verticalAlign: 'bottom'//,
+				        //y: 70,
+				        //layout: 'vertical'
+				    },*/
+	                exporting: {
+                    	enabled: false
+            		},
 				    series: [
-				    <%BAROMETER_JSON["sources"].keys().each_with_index do |source,index|%>
 				    {
-				    	name: <%="'#{source}'".html_safe%>,
+				    	name: 'OA',
 				    	data: [
-				    		<%BAROMETER_JSON["sources"][source]["topics"].keys().each_with_index do |topic,t_index|%>
-				    			<%=BAROMETER_JSON["sources"][source]["topics"][topic]["oa"]%>
-				    			<%="#{(BAROMETER_JSON["sources"][source]["topics"].keys().size-1 == t_index ? '' : ',')}"%>
+				    		<%=calculate_percentage(BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["oa"],BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["total"], true)%>,
+				    		<%BAROMETER_JSON["general"]["oa_potential_hybrid"]["topics"].keys().each_with_index do |topic, t_index|%>
+				    			<%=calculate_percentage(BAROMETER_JSON["general"]["oa_potential_hybrid"]["topics"][topic]["oa"],BAROMETER_JSON["general"]["oa_potential_hybrid"]["topics"][topic]["total"], true)%>
+				    			<%="#{(BAROMETER_JSON["general"]["oa_potential_hybrid"]["topics"].keys().size-1 == t_index ? '' : ',')}"%>
 				    		<%end%>
 				    	],
 				    	pointPlacement: 'on'
-				    }<%="#{(BAROMETER_JSON["sources"].keys().size-1 == index ? '' : ',')}"%>
-				    <%end%>
+				    },
+				    {
+				    	name: 'Potential',
+				    	data: [
+				    		<%=calculate_percentage(BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["potential"],BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["total"], true)%>,
+				    		<%BAROMETER_JSON["general"]["oa_potential_hybrid"]["topics"].keys().each_with_index do |topic, t_index|%>
+				    			<%=calculate_percentage(BAROMETER_JSON["general"]["oa_potential_hybrid"]["topics"][topic]["potential"],BAROMETER_JSON["general"]["oa_potential_hybrid"]["topics"][topic]["total"], true)%>
+				    			<%="#{(BAROMETER_JSON["general"]["oa_potential_hybrid"]["topics"].keys().size-1 == t_index ? '' : ',')}"%>
+				    		<%end%>
+				    	],
+				    	pointPlacement: 'on'
+				    }
 				    ]
 				}); // container1 chart
-			
-				$('#container2').highcharts({ 
-				    chart: {
-				        polar: true,
-				        type: 'line'
-				    },
-				    title: {
-				        text: 'Non-Publications in Topic',
-				        x: -80
-				    },
-				    pane: {
-				    	size: '80%'
-				    },
-				    xAxis: {
-				        categories: [
-				        	<%BAROMETER_JSON["topics"].keys().each_with_index do |topic,index|%>
-				        		<%="'#{topic}'#{(index==BAROMETER_JSON["topics"].keys().size-1 ? '': ',')}".html_safe%>
-				        	<%end%>
-				        		],
-				        tickmarkPlacement: 'on',
-				        lineWidth: 0
-				    },  
-				    yAxis: {
-				        gridLineInterpolation: 'polygon',
-				        lineWidth: 0,
-				        min: 0
-				    },
-				    tooltip: {
-				    	shared: true,
-				        pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}</b><br/>'
-				    },
-				    legend: {
-				        align: 'right',
-				        verticalAlign: 'top',
-				        y: 70,
-				        layout: 'vertical'
-				    },
-				    series: [
-				    <%BAROMETER_JSON["sources"].keys().each_with_index do |source,index|%>
-				    {
-				    	name: <%="'#{source}'".html_safe%>,
-				    	data: [
-				    		<%BAROMETER_JSON["sources"][source]["topics"].keys().each_with_index do |topic,t_index|%>
-				    			<%=BAROMETER_JSON["sources"][source]["topics"][topic]["non_oa"]%>
-				    			<%="#{(BAROMETER_JSON["sources"][source]["topics"].keys().size-1 == t_index ? '' : ',')}"%>
-				    		<%end%>
-				    	],
-				    	pointPlacement: 'on'
-				    }<%="#{(BAROMETER_JSON["sources"].keys().size-1 == index ? '' : ',')}"%>
-				    <%end%>
-				    ]
-				}); // container2 chart
+	});
+</script>

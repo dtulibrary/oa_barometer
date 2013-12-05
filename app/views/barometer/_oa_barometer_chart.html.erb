@@ -11,8 +11,7 @@ var requestAnimationFrame =
 
 /* Animation Object */  
 var animationObject = {
-	//'startPercentage': 0.0,
-	'endPercentage': 0.102,
+	'endPercentage': <%=calculate_percentage(BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["oa"], BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["total"])%>,
 	'currentPercentage': 0.0
 	};
 

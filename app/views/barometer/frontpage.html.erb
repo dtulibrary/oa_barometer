@@ -56,7 +56,7 @@
         	<%= select_tag "content-selector-universities", options_for_select(@menu_items_universities), onchange: "updated(this, 'universities');" %>
         	<%end%>
         	<div id="overlay-total" class="container-overlay">
-        		<div class="overlay-header">TOTAL OPEN ACCESS 2011</div>
+        		<div class="overlay-header"><p>TOTAL OPEN ACCESS 2011</p></div>
         		<div class="overlay-right">
         			Click to see the potential amount of Open Access
         		</div>
@@ -69,7 +69,20 @@
         	</div>
         	
         	<div id="overlay-potential" class="container-overlay">
-        		<div class="overlay-header">POTENTIAL OPEN ACCESS 2011</div>
+        		<div class="overlay-header"><p>POTENTIAL OPEN ACCESS 2011</p></div>
+        		<div class="overlay-right">
+        			Click to see the overview of Open Access
+        		</div>
+        		<div class="overlay-left">
+        				Percentage of peer reviewed journal articles from 2011, published by authors from all Danish universities, that is available for free download in either local repositories or in Open Access journals.
+        			<p>
+        				This includes all articles in journals that according to SHERPA/RoMEO allows deposit of postprints and publishers version) and articles published in Open Access journals listed in <a href="http://www.doaj.org/">DOAJ.org</a>
+        			</p>
+        		</div>
+        	</div>
+        	
+        	<div id="overlay-overview" class="container-overlay">
+        		<div class="overlay-header"><p>OPEN ACCESS 2011</p></div>
         		<div class="overlay-right">
         			Click to see the total amount of Open Access
         		</div>
@@ -90,11 +103,16 @@
         			<li>
 	        			<img height="500" width="800">Canvas not available.</img>
         			</li>
+        			<li>
+	        			<img height="500" width="800">Canvas not available.</img>
+        			</li>
         		</ul>
         	</div>
         	
 	        <div id="container0" class="visualization">
 	        	<canvas id="canvas" height="600" width="800">Canvas not available.</canvas>
+	        </div>
+	        <div id="container0-2" class="visualization sliderChart">
 	        </div>
 	        <div id="container1" class="visualization"></div>
 	        <div id="container2" class="visualization"></div>
@@ -116,23 +134,33 @@
 				  
 					onSlideAfter: function($slideElement, oldIndex, newIndex){
 						$('.container-overlay').hide();
+						$('.visualization').hide();
 						if(newIndex == 0){
 							$('#overlay-total').show();
 							currentOverlay = 0;
 						  	animationObject = {
-								'endPercentage': 0.102,
+								'endPercentage': <%=calculate_percentage(BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["oa"], BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["total"])%>,
 								'currentPercentage': 0.0
 							};
 						} else if(newIndex == 1){
 							$('#overlay-potential').show();
 							currentOverlay = 1;
 							animationObject = {
-								'endPercentage': 0.484,
+								'endPercentage': <%=calculate_percentage(BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["potential"], BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["total"])%>,
 								'currentPercentage': 0.0
 							};
+						} else if(newIndex == 2){
+							$('#container0-2').show();
+							$('#overlay-overview').show();
+							//$(window).resize();
+							currentOverlay = 2;
 						}
-						render();
-		  				animate('currentPercentage', 0, 3000);
+						
+						if(newIndex <= 1){
+							$('#container0').show();
+							render();
+			  				animate('currentPercentage', 0, 3000);
+		  				}
 					}
 				});
         		
@@ -160,15 +188,18 @@
 			  	if(currentOverlay == 0){
 			  		$('#overlay-total').show();//TODO: fix this! //$('.container-overlay').show();
 				  	animationObject = {
-						'endPercentage': 0.102,
+						'endPercentage': <%=calculate_percentage(BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["oa"], BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["total"])%>,
 						'currentPercentage': 0.0
 					};
 			  	} else if(currentOverlay == 1){
 			  		$('#overlay-potential').show();//TODO: fix this! //$('.container-overlay').show();
 			  		animationObject = {
-						'endPercentage': 0.484,
+						'endPercentage': <%=calculate_percentage(BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["potential"], BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["total"])%>,
 						'currentPercentage': 0.0
 					};
+			  	} else if(currentOverlay == 2){
+			  		$('#container0').hide();
+			  		$('#container0-2').show();
 			  	}
 			  	$('.slider-overlay').show();
 			  	render();
@@ -237,6 +268,7 @@
 			}
         </script>
         <%=render :partial => "barometer/oa_barometer_chart"%>
+        <%=render :partial => "barometer/spiderchart"%>
         <script type="text/javascript">
         	<%=render :partial => "barometer/reingold_tilford_tree"%> // container5
 		</script>
