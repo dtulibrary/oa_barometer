@@ -16,14 +16,12 @@ class BarometerController < ApplicationController
   end
   
   def menu
-    #puts "The menu is here!"
-    #puts params
     @selected_topic = params["sub-selector-topic"]
     @selected_institution = params["sub-selector-institution"]
     @selected_scope_universities = params["content-selector-universities"]
     respond_to do |format|
-      format.html # show_rec_horses.html.erb
-      format.js   # show_rec_horses.js.erb
+      format.html
+      format.js
     end
   end
   

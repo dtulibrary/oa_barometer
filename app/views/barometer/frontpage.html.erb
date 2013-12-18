@@ -152,7 +152,6 @@
 						} else if(newIndex == 2){
 							$('#container0-2').show();
 							$('#overlay-overview').show();
-							//$(window).resize();
 							currentOverlay = 2;
 						}
 						
@@ -186,13 +185,13 @@
 			  $('#container'+index).show();
 			  if(index==0){ // animate oa barometer
 			  	if(currentOverlay == 0){
-			  		$('#overlay-total').show();//TODO: fix this! //$('.container-overlay').show();
+			  		$('#overlay-total').show();
 				  	animationObject = {
 						'endPercentage': <%=calculate_percentage(BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["oa"], BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["total"])%>,
 						'currentPercentage': 0.0
 					};
 			  	} else if(currentOverlay == 1){
-			  		$('#overlay-potential').show();//TODO: fix this! //$('.container-overlay').show();
+			  		$('#overlay-potential').show();
 			  		animationObject = {
 						'endPercentage': <%=calculate_percentage(BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["potential"], BAROMETER_JSON["general"]["oa_potential_hybrid"]["overall"]["total"])%>,
 						'currentPercentage': 0.0
@@ -212,7 +211,6 @@
 			  	//$('.sub-selector').hide();
 			  	var selectedName = $('#content-selector').find(":selected").text();
 			  	var selectedValue = $('#content-selector').find(":selected").val();
-			  	//alert(selectedValue + " " + selectedName);
 			  	if(selectedValue == '<%=@menu_items[0]%>'){
 			  		//$('#sub-selector-topic').hide();
 			  		$('#container'+index).show();
@@ -240,7 +238,6 @@
 			    var content=element.options[idx].innerHTML;
 			    
 			    if(chart == 'top'){
-				    //alert(val + " " + content);
 				    if(val == '<%=@menu_items[0]%>'){
 				    	//$('#sub-selector-topic').show();
 				  		$('#container3').show();
